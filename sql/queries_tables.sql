@@ -1,30 +1,30 @@
-DROP TABLE IF EXISTS Transactions CASCADE;
-DROP TABLE IF EXISTS Comptes CASCADE;
-DROP TABLE IF EXISTS Clients CASCADE;
-DROP TABLE IF EXISTS Produits CASCADE;
-DROP TABLE IF EXISTS Agences CASCADE;
-DROP TABLE IF EXISTS Segments CASCADE;
+-- DROP TABLE IF EXISTS Transactions CASCADE;
+-- DROP TABLE IF EXISTS Comptes CASCADE;
+-- DROP TABLE IF EXISTS Clients CASCADE;
+-- DROP TABLE IF EXISTS Produits CASCADE;
+-- DROP TABLE IF EXISTS Agences CASCADE;
+-- DROP TABLE IF EXISTS Segments CASCADE;
 
 
-CREATE TABLE Segments (
+CREATE TABLE  IF NOT EXISTS Segments (
   segment_id SERIAL PRIMARY KEY,
   nom_segment VARCHAR(50)
 );
 
 
-CREATE TABLE Agences (
-  agence_id SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS Agences (
+  agence_id SERIAL PRIMARY KEY AUTO INCREMENT,
   nom_agence VARCHAR(100)
 );
 
 
-CREATE TABLE Produits (
+CREATE TABLE IF NOT EXISTS Produits (
   produit_id SERIAL PRIMARY KEY,
   type_produit VARCHAR(50)
 );
 
 
-CREATE TABLE Clients (
+CREATE TABLE IF NOT EXISTS Clients (
   client_id VARCHAR(50) PRIMARY KEY,
   nom_client VARCHAR(100),
   score_credit INT,
@@ -33,7 +33,7 @@ CREATE TABLE Clients (
 );
 
 
-CREATE TABLE Comptes (
+CREATE TABLE IF NOT EXISTS Comptes (
   compte_id SERIAL PRIMARY KEY,
   numero_compte VARCHAR(50) UNIQUE,
   solde_net DECIMAL(15, 2),
@@ -42,7 +42,7 @@ CREATE TABLE Comptes (
   agence_id INT REFERENCES Agences(agence_id)
 );
 
-CREATE TABLE Transactions (
+CREATE TABLE IF NOT EXISTS Transactions (
   transaction_id VARCHAR(50) PRIMARY KEY, 
   compte_id INT REFERENCES Comptes(compte_id),
   date_transaction TIMESTAMP,
